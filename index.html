@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Aniversário, Agatha! 🎉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ffd700, #ffed4e, #fff8dc, #ffd700);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 2s ease-out;
+        }
+
+        .main-title {
+            font-size: 4rem;
+            color: #8b4513;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            color: #b8860b;
+            font-style: italic;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .poems-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .poem-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 3px solid #ffd700;
+            transform: translateY(50px);
+            opacity: 0;
+            animation: slideUp 1s ease-out forwards;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .poem-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .poem-card:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        .poem-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .poem-card:nth-child(1) { animation-delay: 0.2s; }
+        .poem-card:nth-child(2) { animation-delay: 0.4s; }
+        .poem-card:nth-child(3) { animation-delay: 0.6s; }
+        .poem-card:nth-child(4) { animation-delay: 0.8s; }
+        .poem-card:nth-child(5) { animation-delay: 1s; }
+        .poem-card:nth-child(6) { animation-delay: 1.2s; }
+
+        .poem-title {
+            font-size: 1.8rem;
+            color: #8b4513;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .poem-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #654321;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .celebration-section {
+            text-align: center;
+            margin: 60px 0;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 25px;
+            border: 3px solid #ffd700;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .celebration-text {
+            font-size: 2rem;
+            color: #8b4513;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .sparkles {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: sparkleFloat 3s ease-in-out infinite;
+        }
+
+        .birthday-cake {
+            font-size: 4rem;
+            animation: bounce 2s ease-in-out infinite;
+            margin: 20px 0;
+        }
+
+        .balloons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .balloon {
+            position: absolute;
+            font-size: 3rem;
+            animation: floatUp 8s ease-in-out infinite;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            border: 2px solid #ffd700;
+        }
+
+        .footer-text {
+            font-size: 1.5rem;
+            color: #8b4513;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes sparkleFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .poems-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .poem-card {
+                padding: 20px;
+            }
+            
+            .celebration-text {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="balloons" id="balloons"></div>
+    <div class="sparkles" id="sparkles"></div>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="main-title">Feliz Aniversário, Agatha!</h1>
+            <p class="subtitle">Uma menina de ouro merece os mais belos versos</p>
+        </header>
+
+        <div class="poems-container">
+            <div class="poem-card">
+                <h2 class="poem-title">✨ Brilho Dourado ✨</h2>
+                <div class="poem-text">
+                    Agatha, menina de luz dourada,<br>
+                    Seu sorriso ilumina cada manhã,<br>
+                    Como o sol que desponta na alvorada,<br>
+                    Trazendo alegria que nunca se cansa.<br><br>
+                    
+                    Neste dia especial de celebração,<br>
+                    Que a vida te cubra de felicidade,<br>
+                    E que cada sonho vire realização,<br>
+                    Pois você merece toda a bondade.
+                </div>
+            </div>
+
+            <div class="poem-card">
+                <h2 class="poem-title">🌟 Estrela Radiante 🌟</h2>
+                <div class="poem-text">
+                    Como estrela que brilha no céu infinito,<br>
+                    Agatha, você é pura inspiração,<br>
+                    Seu coração bondoso, tão bonito,<br>
+                    Enche o mundo de amor e emoção.<br><br>
+                    
+                    Que este novo ano seja repleto<br>
+                    De momentos mágicos e especiais,<br>
+                    E que cada dia seja perfeito,<br>
+                    Cheio de surpresas celestiais.
+                </div>
+            </div>
+
+            <div class="poem-card">
+                <h2 class="poem-title">🌹 Rosa Dourada 🌹</h2>
+                <div class="poem-text">
+                    Agatha, rosa que floresce em ouro,<br>
+                    Sua beleza transcende o olhar,<br>
+                    É um tesouro mais valioso que tesouro,<br>
+                    Que faz qualquer coração se encantar.<br><br>
+                    
+                    Neste dia de festa e alegria,<br>
+                    Celebramos quem você é,<br>
+                    Uma alma pura, cheia de magia,<br>
+                    Que nos ensina o que é ter fé.
+                </div>
+            </div>
+
+            <div class="poem-card">
+                <h2 class="poem-title">🦋 Borboleta Dourada 🦋</h2>
+                <div class="poem-text">
+                    Como borboleta de asas douradas,<br>
+                    Agatha voa livre pelo jardim da vida,<br>
+                    Espalhando cores encantadas,<br>
+                    Deixando beleza por onde caminha.<br><br>
+                    
+                    Que sua jornada seja sempre florida,<br>
+                    Com pétalas de sonhos realizados,<br>
+                    E que cada página seja colorida<br>
+                    Com momentos abençoados.
+                </div>
+            </div>
+
+            <div class="poem-card">
+                <h2 class="poem-title">🌙 Lua de Ouro 🌙</h2>
+                <div class="poem-text">
+                    Agatha, lua cheia de esplendor,<br>
+                    Que ilumina as noites mais escuras,<br>
+                    Seu brilho aquece com tanto amor,<br>
+                    Transformando tristezas em venturas.<br><br>
+                    
+                    Neste aniversário tão especial,<br>
+                    Que a felicidade seja sua companhia,<br>
+                    E que cada momento seja genial,<br>
+                    Repleto de pura harmonia.
+                </div>
+            </div>
+
+            <div class="poem-card">
+                <h2 class="poem-title">💎 Diamante Precioso 💎</h2>
+                <div class="poem-text">
+                    Agatha, diamante raro e precioso,<br>
+                    Lapidado com carinho e ternura,<br>
+                    Seu coração generoso e bondoso<br>
+                    É a mais bela das criaturas.<br><br>
+                    
+                    Que este novo ciclo que se inicia<br>
+                    Seja repleto de conquistas e vitórias,<br>
+                    E que cada dia seja uma delícia,<br>
+                    Escrevendo as mais belas histórias.
+                </div>
+            </div>
+        </div>
+
+        <div class="celebration-section">
+            <div class="celebration-text">
+                🎉 Hoje é o seu dia especial! 🎉
+            </div>
+            <div class="birthday-cake">🎂</div>
+            <div class="celebration-text">
+                Que todos os seus sonhos se realizem!
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p class="footer-text">
+                Com muito carinho e os melhores desejos,<br>
+                Feliz Aniversário, Agatha! 💛✨
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Criar balões flutuantes
+        function createBalloons() {
+            const balloons = document.getElementById('balloons');
+            const colors = ['🎈', '🎀', '🌟', '✨', '💫'];
+            
+            setInterval(() => {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.textContent = colors[Math.floor(Math.random() * colors.length)];
+                balloon.style.left = Math.random() * 100 + '%';
+                balloon.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                balloon.style.animationDelay = Math.random() * 2 + 's';
+                balloons.appendChild(balloon);
+                
+                setTimeout(() => {
+                    balloon.remove();
+                }, 8000);
+            }, 2000);
+        }
+
+        // Criar efeito de brilhos
+        function createSparkles() {
+            const sparklesContainer = document.getElementById('sparkles');
+            
+            setInterval(() => {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * window.innerWidth + 'px';
+                sparkle.style.top = Math.random() * window.innerHeight + 'px';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                sparklesContainer.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 3000);
+            }, 500);
+        }
+
+        // Efeito de clique nos cartões
+        function addCardEffects() {
+            const cards = document.querySelectorAll('.poem-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-10px) scale(1.02)';
+                    }, 150);
+                });
+            });
+        }
+
+        // Animação de entrada suave para os elementos
+        function animateOnScroll() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            const cards = document.querySelectorAll('.poem-card');
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+        }
+
+        // Inicializar todas as animações
+        document.addEventListener('DOMContentLoaded', function() {
+            createBalloons();
+            createSparkles();
+            addCardEffects();
+            animateOnScroll();
+            
+            // Adicionar efeito de confete ao clicar no bolo
+            const cake = document.querySelector('.birthday-cake');
+            cake.addEventListener('click', function() {
+                // Criar confete temporário
+                for (let i = 0; i < 20; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.textContent = '🎊';
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = Math.random() * window.innerWidth + 'px';
+                    confetti.style.top = '50%';
+                    confetti.style.fontSize = '2rem';
+                    confetti.style.pointerEvents = 'none';
+                    confetti.style.zIndex = '1001';
+                    confetti.style.animation = 'floatUp 2s ease-out forwards';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 2000);
+                }
+            });
+        });
+
+        // Efeito de mudança de cor suave no fundo
+        let hue = 45;
+        setInterval(() => {
+            hue = (hue + 1) % 60;
+            document.body.style.filter = `hue-rotate(${hue}deg)`;
+        }, 100);
+    </script>
+</body>
+</html>
